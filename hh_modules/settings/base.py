@@ -69,6 +69,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hh_modules.wsgi.application'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hh_modules'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
