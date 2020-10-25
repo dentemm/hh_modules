@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react'
+
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css.map'
+
+import Juxtapose from './ui/modules/Juxtapose'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Juxtapose />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
