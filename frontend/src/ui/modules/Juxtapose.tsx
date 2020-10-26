@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useDrag, useMove } from 'react-use-gesture'
+import { useDrag } from 'react-use-gesture'
 
 import before from '../../static/dev/images/before.jpg'
 import after from '../../static/dev/images/after.jpg'
