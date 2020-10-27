@@ -33,9 +33,6 @@ const JuxtaPose: React.FC = () => {
     } else if (percentage < 0) {
       percentage = 0
     }
-
-    console.log(percentage)
-
     setWidth(percentage)
   }
 
@@ -43,6 +40,7 @@ const JuxtaPose: React.FC = () => {
     <div 
       ref={ref}
       {...gesture()}
+      style={{touchAction: 'pan-y'}}
     >
       <figure
         style={{width: '100%'}}
