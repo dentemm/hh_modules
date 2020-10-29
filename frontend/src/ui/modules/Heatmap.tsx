@@ -9,7 +9,8 @@ const Heatmap: React.FC = () => {
   const createHeatMapInstance = () => {
     return h337.create({
       container: document.getElementById('heatmapContainer')!,
-      radius: 60
+      // radius: 25,
+      // opacity: 0.6
     })
   }
 
@@ -20,16 +21,16 @@ const Heatmap: React.FC = () => {
     heatmapRef.current = createHeatMapInstance()
 
     if (heatmapRef.current) {
+      // heatmapRef.current.setData()
       heatmapRef.current.setData(createInitialData())
     }
   }, [])
 
   const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log(event.pageX)
-    console.log(event.pageY)
+    console.log('adding datapoint')
+    console.log(`x: ${event.pageX} - y: ${event.pageY}`)
 
     if (heatmapRef.current) {
-      console.log('adding data')
       heatmapRef.current.addData({x: event.pageX, y: event.pageY, value: 1})
     }
   }
@@ -42,10 +43,10 @@ const Heatmap: React.FC = () => {
     let min = 0
     const width = 700
     const height = 490
-    let len = 20
+    let len = 1
 
     while (len--) {
-      const val = Math.floor(Math.random() * 5)
+      const val = Math.floor(Math.random() * 3)
 
       max = Math.max(max, val)
       min = Math.min(min, val)

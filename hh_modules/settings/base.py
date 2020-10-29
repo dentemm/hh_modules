@@ -56,7 +56,7 @@ ROOT_URLCONF = 'hh_modules.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['hh_modules/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,8 +120,10 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
 ]
+
+print(os.path.join(BASE_DIR, 'frontend', 'build', 'static'))
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
