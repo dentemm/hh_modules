@@ -6,18 +6,33 @@ import before from '../../static/dev/images/before.jpg'
 import after from '../../static/dev/images/after.jpg'
 import { FullGestureState } from 'react-use-gesture/dist/types'
 
+interface Dimensions {
+  width: number,
+  height: number,
+  top: number,
+  left: number
+}
+
 const JuxtaPose: React.FC = () => {
 
   const ref = React.useRef<HTMLDivElement>(null)
-  const [dimensions, setDimensions] = React.useState({width: 0, height: 0}) 
+  const [dimensions, setDimensions] = React.useState<Dimensions>({width: 0, height: 0, top: 0, left: 0}) 
   const [width, setWidth] = React.useState(50)
+  // const [position, setPosition] = React.useState({top: 0, left: 0})
 
   React.useEffect(() => {
     if (ref.current) {
-      setDimensions({
+
+      const data: Dimensions = {
         width: ref.current.offsetWidth,
-        height: ref.current.offsetHeight
-      })
+        height: ref.current.offsetHeight,
+        top: ref.current.offsetTop,
+        left: ref.current.offsetLeft
+      }
+
+      console.log(data)
+
+      setDimensions(data)
     }
   }, [])
 
@@ -53,7 +68,7 @@ const JuxtaPose: React.FC = () => {
         />
         <figcaption
           className="position-absolute overflow-hidden" 
-          style={{top: 0, left: 0, width: `${width}%`}}
+          style={{top: dimensions.top, left: dimensions.height, width: `${width}%`}}
         >
           <img
             src={after}
