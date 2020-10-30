@@ -30,8 +30,6 @@ const JuxtaPose: React.FC = () => {
         left: ref.current.offsetLeft
       }
 
-      console.log(data)
-
       setDimensions(data)
     }
   }, [])

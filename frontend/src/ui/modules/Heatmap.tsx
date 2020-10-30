@@ -20,45 +20,69 @@ const Heatmap: React.FC<Props> = (props) => {
   const heatmapRef: React.MutableRefObject<h337.Heatmap<"value", "x", "y"> | undefined>  = React.useRef(undefined)
 
   const ref = React.useRef<HTMLImageElement>(null)
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   const [dimensions, setDimensions] = React.useState<Dimensions>({offsetX: 0, offsetY: 0, width: 0, height: 0}) 
 
   React.useEffect(() => {
-
-    heatmapRef.current?.setData(createInitialData(ref.current!.offsetWidth, ref.current!.offsetHeight))
-
-    const data: Dimensions = {
-      offsetX: ref.current!.offsetLeft,
-      offsetY: ref.current!.offsetHeight,
-      width: ref.current!.offsetWidth,
-      height: ref.current!.offsetHeight
-    }
-
-    console.log('DIMENSIES')
-    console.log(data)
-
-  }, [props.test])
-
-  React.useEffect(() => {
     heatmapRef.current = createHeatMapInstance()
+    heatmapRef.current?.setData({min: 0, max: 0, data: []})
+
+    // Weight until render complete!
+    setTimeout(() => {
+      calculateDimensions()
+    }, 1000);
+
   }, [])
 
+  React.useEffect(() => {
+
+    heatmapRef.current = createHeatMapInstance()
+    heatmapRef.current?.setData({min: 0, max: 0, data: []})
+
+  }, [dimensions])
+
+  React.useEffect(() => {
+
+    if (props.test) {
+      heatmapRef.current?.setData(createRandomData(dimensions.width, dimensions.height))
+    } else {
+      heatmapRef.current?.setData({min: 0, max: 0, data: []})
+    }
+
+  }, [props.test, dimensions.width, dimensions.height])
+
   const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log('adding datapoint')
-    console.log(`x: ${event.pageX} - y: ${event.pageY}`)
+
+    const xValue = event.clientX
+    const yValuye = event.nativeEvent.pageY - dimensions.offsetY
 
     if (heatmapRef.current) {
-      // heatmapRef.current.addData({x: event.pageX, y: event.pageY, value: 1})
-      heatmapRef.current.addData({x: 50, y: 50, value: 1})
+      heatmapRef.current.addData({x: xValue, y: yValuye, value: 1})
+    }
+  }
+
+  const calculateDimensions = () => {
+
+    console.log(ref.current?.y)
+    console.log(containerRef.current?.offsetHeight)
+
+    if (ref.current) {
+      setDimensions({
+        width: ref.current.width,
+        height: ref.current.height,
+        offsetY: ref.current.y,
+        offsetX: ref.current.x
+      })
     }
   }
 
   return (
     <div 
+      ref={containerRef}
       id='heatmapContainer'
       onClick={onClick}
-      style={{width: 1233, height: 865, backgroundColor: 'red'}}
-      // style={{width: dimensions.width, height: dimensions.height, backgroundColor: 'red'}}
+      style={{width: dimensions.width, height: dimensions.height}}
     >
       <img
         ref={ref}
@@ -66,17 +90,10 @@ const Heatmap: React.FC<Props> = (props) => {
         alt=''
       /> 
     </div>
-    // <img
-    //   ref={ref}
-    //   id='heatmapContainer'
-    //   onClick={onClick}
-    //   src={image}
-    //   alt=''
-    // />
   )
 }
 
-const createInitialData = (width: number = 200, height: number = 200): h337.HeatmapData<Record<"value" | "x" | "y", number>> => {
+const createRandomData = (width: number = 200, height: number = 200): h337.HeatmapData<Record<"value" | "x" | "y", number>> => {
     
   // now generate some random data
   let points: h337.DataPoint[] = []
