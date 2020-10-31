@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'frontend', 'build'),
 ]
 
-print(os.path.join(BASE_DIR, 'frontend', 'build', 'static'))
+# print(os.path.join(BASE_DIR, 'frontend', 'build', 'static'))
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
