@@ -22,7 +22,10 @@ function App() {
       </div>
       <div>
         <h2>Juxtapose</h2>
-        <Juxtapose />
+        <Juxtapose
+          beforeUrl={'https://hh-modules.s3.eu-central-1.amazonaws.com/images/juxtapose/before.jpg'}
+          afterUrl={'https://hh-modules.s3.eu-central-1.amazonaws.com/images/juxtapose/after.jpg'}
+        />
       </div>
         <h2>Heatmap</h2>
         <div

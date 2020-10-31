@@ -2,8 +2,6 @@ import * as React from 'react'
 
 import { useDrag } from 'react-use-gesture'
 
-import before from '../../static/dev/images/before.jpg'
-import after from '../../static/dev/images/after.jpg'
 import { FullGestureState } from 'react-use-gesture/dist/types'
 
 interface Dimensions {
@@ -13,7 +11,12 @@ interface Dimensions {
   left: number
 }
 
-const JuxtaPose: React.FC = () => {
+interface Props {
+  beforeUrl: string,
+  afterUrl: string
+}
+
+const JuxtaPose: React.FC<Props> = (props) => {
 
   const ref = React.useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = React.useState<Dimensions>({width: 0, height: 0, top: 0, left: 0}) 
@@ -59,7 +62,7 @@ const JuxtaPose: React.FC = () => {
         style={{width: '100%'}}
       >
         <img
-          src={before}
+          src={props.beforeUrl}
           alt={''}
           className="d-block vw-100"
           // style={{width: '100%'}}
@@ -69,7 +72,7 @@ const JuxtaPose: React.FC = () => {
           style={{top: dimensions.top, left: dimensions.height, width: `${width}%`}}
         >
           <img
-            src={after}
+            src={props.afterUrl}
             alt={''}
             className="d-block vw-100"
             style={{opacity: '100%'}}

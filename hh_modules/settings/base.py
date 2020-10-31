@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'juxtapose.apps.JuxtaposeConfig'
+    'juxtapose.apps.JuxtaposeConfig',
+    'heatmap.apps.HeatmapConfig'
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import image from '../../static/dev/images/heatmap.jpg'
-
 import * as h337 from 'heatmap.js'
 
 interface Dimensions {
@@ -12,7 +10,8 @@ interface Dimensions {
 }
 
 interface Props {
-  test: boolean
+  test: boolean,
+  imageUrl: string
 }
 
 const Heatmap: React.FC<Props> = (props) => {
@@ -86,7 +85,7 @@ const Heatmap: React.FC<Props> = (props) => {
     >
       <img
         ref={ref}
-        src={image}
+        src={props.imageUrl}
         alt=''
       /> 
     </div>
