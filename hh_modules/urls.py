@@ -21,8 +21,8 @@ from django.conf import settings
 from .views import HomeView
 
 urlpatterns = [
-    # path('juxtapose/', include('juxtapose.urls')),
     path('', HomeView.as_view(), name='home'),
+    path('juxtapose/', include('juxtapose.urls')),
     path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
