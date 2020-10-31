@@ -121,7 +121,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'frontend', 'build'),
+    os.path.join(BASE_DIR, 'hh_modules', 'static'),
 ]
 
 # print(os.path.join(BASE_DIR, 'frontend', 'build', 'static'))

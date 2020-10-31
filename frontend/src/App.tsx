@@ -43,7 +43,7 @@ function App() {
           }       
         </div>
         <Heatmap
-          // hasRandomData={hasData}
+          imageUrl={'https://hh-modules.s3.eu-central-1.amazonaws.com/images/heatmap/heatmap.jpg'}
           test={hasData}
         />
     </div>
