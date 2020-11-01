@@ -1,11 +1,16 @@
 import * as React from 'react'
 
+import {
+  BrowserRouter as Router
+} from 'react-router-dom'
+
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css.map'
 
 import Juxtapose from './ui/modules/Juxtapose'
 import Heatmap from './ui/modules/Heatmap'
+import Navbar from './ui/navigation/navBar'
 
 function App() {
 
@@ -16,7 +21,9 @@ function App() {
   }
   
   return (
+    <Router>
     <div className="App">
+      <Navbar />
       <div>
         <h1>Health House Modules Demo Page</h1>
       </div>
@@ -47,6 +54,7 @@ function App() {
           test={hasData}
         />
     </div>
+    </Router>
   );
 }
 
