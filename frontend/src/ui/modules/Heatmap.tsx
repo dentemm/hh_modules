@@ -77,18 +77,18 @@ const Heatmap: React.FC<Props> = (props) => {
   }
 
   return (
-    <div 
-      ref={containerRef}
-      id='heatmapContainer'
-      onClick={onClick}
-      style={{width: dimensions.width, height: dimensions.height}}
-    >
-      <img
-        ref={ref}
-        src={props.imageUrl}
-        alt=''
-      /> 
-    </div>
+      <div 
+        ref={containerRef}
+        id='heatmapContainer'
+        onClick={onClick}
+        style={{width: dimensions.width, height: dimensions.height}}
+      >
+        <img
+          ref={ref}
+          src={props.imageUrl}
+          alt=''
+        /> 
+      </div>
   )
 }
 

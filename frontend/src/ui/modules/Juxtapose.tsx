@@ -24,6 +24,21 @@ const JuxtaPose: React.FC<Props> = (props) => {
   // const [position, setPosition] = React.useState({top: 0, left: 0})
 
   React.useEffect(() => {
+
+    // setTimeout(() => {
+    //   if (ref.current) {
+
+    //     const data: Dimensions = {
+    //       width: ref.current.offsetWidth,
+    //       height: ref.current.offsetHeight,
+    //       top: ref.current.offsetTop,
+    //       left: ref.current.offsetLeft
+    //     }
+  
+    //     setDimensions(data)
+    //   }
+    // }, 2000);
+
     if (ref.current) {
 
       const data: Dimensions = {
@@ -57,15 +72,15 @@ const JuxtaPose: React.FC<Props> = (props) => {
       ref={ref}
       {...gesture()}
       style={{touchAction: 'pan-y'}}
-    >
+      >
       <figure
         style={{width: '100%'}}
       >
         <img
           src={props.beforeUrl}
           alt={''}
-          className="d-block vw-100"
-          // style={{width: '100%'}}
+          className="d-block"
+          style={{width: '100%'}}
         />
         <figcaption
           className="position-absolute overflow-hidden" 
