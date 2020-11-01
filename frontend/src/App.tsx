@@ -1,7 +1,9 @@
 import * as React from 'react'
 
 import {
-  BrowserRouter as Router
+  BrowserRouter as Router,
+  Switch,
+  Route
 } from 'react-router-dom'
 
 import './App.css'
@@ -10,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css.map'
 
 import Juxtapose from './ui/modules/Juxtapose'
 import Heatmap from './ui/modules/Heatmap'
+
+import {AppRoutes} from './ui/navigation/navBar'
 import Navbar from './ui/navigation/navBar'
 
 function App() {
@@ -24,6 +28,19 @@ function App() {
     <Router>
     <div className="App">
       <Navbar />
+
+      <Switch>
+        <Route path={AppRoutes.JUXTAPOSE}>
+          <p>Tweede</p>
+        </Route>
+        <Route path={AppRoutes.HEATMAP}>
+          <p>Derde</p>
+        </Route>
+        <Route path={AppRoutes.HOME}>
+          <p>Eerste</p>
+        </Route>
+      </Switch>
+
       <div>
         <h1>Health House Modules Demo Page</h1>
       </div>
