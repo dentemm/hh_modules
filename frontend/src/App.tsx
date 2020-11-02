@@ -10,18 +10,12 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css.map'
 
-import Heatmap from './ui/modules/Heatmap'
+import HeatmapPage from './ui/pages/HeatmapPage'
 import JuxtaposePage from './ui/pages/JuxtaposePage'
 
 import Navbar, {AppRoutes} from './ui/navigation/NavBar'
 
 function App() {
-
-  const [hasData, setHasData] = React.useState(false)
-
-  const generateRandomData = () => {
-    setHasData(!hasData)
-  }
   
   return (
     <Router>
@@ -33,10 +27,7 @@ function App() {
             <JuxtaposePage/>
           </Route>
           <Route path={AppRoutes.HEATMAP}>
-            <Heatmap
-              imageUrl={'https://hh-modules.s3.eu-central-1.amazonaws.com/images/heatmap/heatmap.jpg'}
-              test={hasData}
-            />
+            <HeatmapPage/>
           </Route>
           <Route path={AppRoutes.HOME}>
             <p>Eerste</p>

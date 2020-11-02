@@ -5,7 +5,7 @@ import ApiService from './../../services/api.service'
 
 interface Props {}
 
-const JuxtaposePage: React.FC<Props> = () => {
+const HeatmapPage: React.FC<Props> = () => {
 
   const [url, setUrl] = React.useState('')
 
@@ -54,4 +54,4 @@ const JuxtaposePage: React.FC<Props> = () => {
 
 }
 
-export default JuxtaposePage
+export default HeatmapPage
