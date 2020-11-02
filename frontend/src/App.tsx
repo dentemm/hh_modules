@@ -10,12 +10,10 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css.map'
 
-import Juxtapose from './ui/modules/Juxtapose'
 import Heatmap from './ui/modules/Heatmap'
 import JuxtaposePage from './ui/pages/JuxtaposePage'
 
-import {AppRoutes} from './ui/navigation/navBar'
-import Navbar from './ui/navigation/navBar'
+import Navbar, {AppRoutes} from './ui/navigation/NavBar'
 
 function App() {
 

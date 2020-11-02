@@ -21,35 +21,31 @@ const JuxtaPose: React.FC<Props> = (props) => {
   const ref = React.useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = React.useState<Dimensions>({width: 0, height: 0, top: 0, left: 0}) 
   const [width, setWidth] = React.useState(50)
-  // const [position, setPosition] = React.useState({top: 0, left: 0})
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
 
-    // setTimeout(() => {
-    //   if (ref.current) {
+    const updateSize = () => {
+      if (ref.current) {
 
-    //     const data: Dimensions = {
-    //       width: ref.current.offsetWidth,
-    //       height: ref.current.offsetHeight,
-    //       top: ref.current.offsetTop,
-    //       left: ref.current.offsetLeft
-    //     }
-  
-    //     setDimensions(data)
-    //   }
-    // }, 2000);
+        const currentWidth = ref.current.offsetWidth
+        const currentLeft = ref.current.offsetLeft
 
-    if (ref.current) {
-
-      const data: Dimensions = {
-        width: ref.current.offsetWidth,
-        height: ref.current.offsetHeight,
-        top: ref.current.offsetTop,
-        left: ref.current.offsetLeft
-      }
-
-      setDimensions(data)
+        const data: Dimensions = {
+          width: currentWidth,
+          height: ref.current.offsetHeight,
+          top: ref.current.offsetTop,
+          left: currentLeft
+        }
+        setDimensions(data)
+        setWidth(currentWidth / 2)
+      } 
     }
+
+    window.addEventListener('resize', updateSize)
+    updateSize()
+
+    return () => window.removeEventListener('resize', updateSize)
+
   }, [])
 
   const gesture = useDrag(state => handler(state))
@@ -57,14 +53,7 @@ const JuxtaPose: React.FC<Props> = (props) => {
   const handler = (state: FullGestureState<'drag'>) => {
 
     const currentValue = state.xy[0]
-    let percentage = 100 * currentValue / dimensions.width
-
-    if (percentage > 100) {
-      percentage = 100
-    } else if (percentage < 0) {
-      percentage = 0
-    }
-    setWidth(percentage)
+    setWidth(currentValue - dimensions.left)
   }
 
   return (
@@ -79,18 +68,22 @@ const JuxtaPose: React.FC<Props> = (props) => {
         <img
           src={props.beforeUrl}
           alt={''}
-          className="d-block"
+          className="d-block img img-fluid"
           style={{width: '100%'}}
         />
         <figcaption
           className="position-absolute overflow-hidden" 
-          style={{top: dimensions.top, left: dimensions.height, width: `${width}%`}}
+          style={{
+            top: dimensions.top,
+            left: dimensions.left,
+            width: `${width}px`
+          }}
         >
           <img
             src={props.afterUrl}
             alt={''}
-            className="d-block vw-100"
-            style={{opacity: '100%'}}
+            className="d-block"
+            style={{opacity: '70%', width: dimensions.width}}
           />
         </figcaption>
       </figure>
