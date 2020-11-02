@@ -1,0 +1,7 @@
+enum ErrorData {
+
+  FETCH_HEATMAP = 'ERROR FETCHING HEATMAP DATA',
+  FETCH_JUXTAPOSE = 'ERROR FETCHING JUXTAPOSE DATA'
+ }
+
+export default ErrorData
