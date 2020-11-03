@@ -13,7 +13,7 @@ enum Endpoints {
 
 const fetchHeatmapImage = async (id: number): Promise<string> => {
 
-  const url = `${BASE_URL}${Endpoints.HEATMAP}${id}`
+  const url = `${BASE_URL}${Endpoints.HEATMAP}${id}/`
 
   try {
     const result = await axios.get<HeatmapResponseData>(url)
@@ -32,7 +32,7 @@ const fetchHeatmapImage = async (id: number): Promise<string> => {
 
 const fetchJuxtaposeImages = async (id: number): Promise<JuxtaposeResponseData> => {
 
-  const url = `${BASE_URL}${Endpoints.JUXTAPOSE}${id}`
+  const url = `${BASE_URL}${Endpoints.JUXTAPOSE}${id}/`
 
   try {
     const result = await axios.get<JuxtaposeResponseData>(url)
