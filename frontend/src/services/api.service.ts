@@ -13,9 +13,7 @@ enum Endpoints {
 
 const fetchHeatmapImage = async (): Promise<string> => {
 
-  // const url = BASE_URL + Endpoints.HEATMAP
-
-  const url = require('./../static/dev/images/heatmap.jpg')
+  const url = BASE_URL + Endpoints.HEATMAP
 
   try {
     const result = await axios.get<HeatmapResponseData>(url)
