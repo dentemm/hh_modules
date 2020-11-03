@@ -16,10 +16,12 @@ const HeatmapPage: React.FC<Props> = () => {
 
   const match = useRouteMatch<{id: string}>(`${AppRoutes.HEATMAP}/:id`)
 
-  if (match) {
-    const id = parseUrl(match)
-    setCurrentId(id)
-  }
+  React.useEffect(() => {
+    if (match) {
+      const id = parseUrl(match)  
+      setCurrentId(id)
+    }
+  }, [])
 
   const generateRandomData = () => {
     setHasData(!hasData)
@@ -28,14 +30,18 @@ const HeatmapPage: React.FC<Props> = () => {
   React.useEffect(() => {
     
     const fetch = async () => {
-      const result = await ApiService.fetchHeatmapImage(currentId)
 
-      setUrl(result)
+      try {
+        const result = await ApiService.fetchHeatmapImage(currentId)
+        setUrl(result)
+
+      } catch (error) {
+        console.log('error fetching: ' + error)
+      }
     }
-
     fetch()
 
-  }, [currentId])
+  }, [])
 
   return (
     <div className="container">

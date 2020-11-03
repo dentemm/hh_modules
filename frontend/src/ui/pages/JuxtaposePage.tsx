@@ -17,10 +17,12 @@ const JuxtaposePage: React.FC<Props> = () => {
 
   const match = useRouteMatch<{id: string}>(`${AppRoutes.JUXTAPOSE}/:id`)
 
-  if (match) {
-    const id = parseUrl(match)
-    setCurrentId(id)
-  }
+  React.useEffect(() => {
+    if (match) {
+      const id = parseUrl(match)  
+      setCurrentId(id)
+    }
+  }, [])
 
   React.useEffect(() => {
     
@@ -32,7 +34,7 @@ const JuxtaposePage: React.FC<Props> = () => {
 
     fetch()
 
-  }, [currentId])
+  }, [])
 
   return (
     <div className="container">
