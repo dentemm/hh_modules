@@ -27,7 +27,9 @@ const Heatmap: React.FC<Props> = (props) => {
     heatmapRef.current = createHeatMapInstance()
     heatmapRef.current?.setData({min: 0, max: 0, data: []})
 
-    calculateDimensions()
+    setTimeout(() => {
+      calculateDimensions()
+    }, 1000);
 
   }, [heatmapRef])
 
@@ -38,12 +40,16 @@ const Heatmap: React.FC<Props> = (props) => {
 
   }, [dimensions])
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
+
+    if (!heatmapRef.current) {
+      return
+    }
 
     if (props.test) {
-      heatmapRef.current?.setData(createRandomData(dimensions.width, dimensions.height))
+      heatmapRef.current!.setData(createRandomData(dimensions.width, dimensions.height))
     } else {
-      heatmapRef.current?.setData({min: 0, max: 0, data: []})
+      heatmapRef.current!.setData({min: 0, max: 0, data: []})
     }
 
   }, [props.test, dimensions.width, dimensions.height])
@@ -59,9 +65,6 @@ const Heatmap: React.FC<Props> = (props) => {
   }
 
   const calculateDimensions = () => {
-
-    console.log(ref.current?.y)
-    console.log(containerRef.current?.offsetHeight)
 
     if (ref.current) {
       setDimensions({
@@ -85,7 +88,6 @@ const Heatmap: React.FC<Props> = (props) => {
           ref={ref}
           src={props.imageUrl}
           // src='https://s3-storage.textopus.nl/wp-content/uploads/2015/02/18064453/mooi-belichte-foto.jpg'
-          // src={require('./../../static/dev/images/heatmap.jpg')}
           alt=''
         /> 
       </div>
