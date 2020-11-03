@@ -7,8 +7,8 @@ import JuxtaposeResponseData from '../models/responseData/juxtapostResponseData'
 const BASE_URL = 'https://hh-modules.herokuapp.com'
 
 enum Endpoints {
-  HEATMAP = '/heatmap/1/',
-  JUXTAPOSE = '/juxtapose/1/'
+  HEATMAP = '/api/heatmap/1/',
+  JUXTAPOSE = '/api/juxtapose/1/'
 }
 
 const fetchHeatmapImage = async (): Promise<string> => {
