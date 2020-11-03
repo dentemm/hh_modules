@@ -23,16 +23,13 @@ const Heatmap: React.FC<Props> = (props) => {
 
   const [dimensions, setDimensions] = React.useState<Dimensions>({offsetX: 0, offsetY: 0, width: 0, height: 0}) 
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     heatmapRef.current = createHeatMapInstance()
     heatmapRef.current?.setData({min: 0, max: 0, data: []})
 
-    // Weight until render complete!
-    setTimeout(() => {
-      calculateDimensions()
-    }, 1000);
+    calculateDimensions()
 
-  }, [])
+  }, [heatmapRef])
 
   React.useEffect(() => {
 
@@ -53,7 +50,7 @@ const Heatmap: React.FC<Props> = (props) => {
 
   const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 
-    const xValue = event.clientX
+    const xValue = event.clientX - dimensions.offsetX
     const yValuye = event.nativeEvent.pageY - dimensions.offsetY
 
     if (heatmapRef.current) {
@@ -70,7 +67,8 @@ const Heatmap: React.FC<Props> = (props) => {
       setDimensions({
         width: ref.current.width,
         height: ref.current.height,
-        offsetY: ref.current.y,
+        // Page Y offset for initial scroll position
+        offsetY: ref.current.y + window.pageYOffset,
         offsetX: ref.current.x
       })
     }
@@ -86,6 +84,8 @@ const Heatmap: React.FC<Props> = (props) => {
         <img
           ref={ref}
           src={props.imageUrl}
+          // src='https://s3-storage.textopus.nl/wp-content/uploads/2015/02/18064453/mooi-belichte-foto.jpg'
+          // src={require('./../../static/dev/images/heatmap.jpg')}
           alt=''
         /> 
       </div>

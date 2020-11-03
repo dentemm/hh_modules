@@ -13,12 +13,14 @@ enum Endpoints {
 
 const fetchHeatmapImage = async (): Promise<string> => {
 
-  const url = BASE_URL + Endpoints.HEATMAP
+  // const url = BASE_URL + Endpoints.HEATMAP
+
+  const url = require('./../static/dev/images/heatmap.jpg')
 
   try {
     const result = await axios.get<HeatmapResponseData>(url)
 
-    if (result.status == 200) {
+    if (result.status === 200) {
       return result.data.image
     } 
     throw new Error()
@@ -37,7 +39,7 @@ const fetchJuxtaposeImages = async (): Promise<JuxtaposeResponseData> => {
   try {
     const result = await axios.get<JuxtaposeResponseData>(url)
 
-    if (result.status == 200) {
+    if (result.status === 200) {
       return result.data
     } 
     throw new Error()
