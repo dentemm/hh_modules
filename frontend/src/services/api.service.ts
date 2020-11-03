@@ -7,13 +7,13 @@ import JuxtaposeResponseData from '../models/responseData/juxtapostResponseData'
 const BASE_URL = 'https://hh-modules.herokuapp.com'
 
 enum Endpoints {
-  HEATMAP = '/api/heatmap/1/',
-  JUXTAPOSE = '/api/juxtapose/1/'
+  HEATMAP = '/api/heatmap/',
+  JUXTAPOSE = '/api/juxtapose/'
 }
 
-const fetchHeatmapImage = async (): Promise<string> => {
+const fetchHeatmapImage = async (id: number): Promise<string> => {
 
-  const url = BASE_URL + Endpoints.HEATMAP
+  const url = `${BASE_URL}${Endpoints.HEATMAP}/${id}`
 
   try {
     const result = await axios.get<HeatmapResponseData>(url)
@@ -30,9 +30,9 @@ const fetchHeatmapImage = async (): Promise<string> => {
   }
 }
 
-const fetchJuxtaposeImages = async (): Promise<JuxtaposeResponseData> => {
+const fetchJuxtaposeImages = async (id: number): Promise<JuxtaposeResponseData> => {
 
-  const url = BASE_URL + Endpoints.JUXTAPOSE
+  const url = `${BASE_URL}${Endpoints.JUXTAPOSE}/${id}`
 
   try {
     const result = await axios.get<JuxtaposeResponseData>(url)

@@ -1,5 +1,8 @@
 import * as React from 'react'
+import { useRouteMatch } from 'react-router-dom'
 import Heatmap from '../modules/Heatmap'
+import { AppRoutes } from '../navigation/NavBar'
+import {parseUrl} from './JuxtaposePage'
 
 import ApiService from './../../services/api.service'
 
@@ -7,9 +10,16 @@ interface Props {}
 
 const HeatmapPage: React.FC<Props> = () => {
 
+  const [currentId, setCurrentId] = React.useState(1)
   const [url, setUrl] = React.useState('')
-
   const [hasData, setHasData] = React.useState(false)
+
+  const match = useRouteMatch<{id: string}>(`${AppRoutes.HEATMAP}/:id`)
+
+  if (match) {
+    const id = parseUrl(match)
+    setCurrentId(id)
+  }
 
   const generateRandomData = () => {
     setHasData(!hasData)
@@ -18,14 +28,14 @@ const HeatmapPage: React.FC<Props> = () => {
   React.useEffect(() => {
     
     const fetch = async () => {
-      const result = await ApiService.fetchHeatmapImage()
+      const result = await ApiService.fetchHeatmapImage(currentId)
 
       setUrl(result)
     }
 
     fetch()
 
-  }, [])
+  }, [currentId])
 
   return (
     <div className="container">
@@ -51,7 +61,6 @@ const HeatmapPage: React.FC<Props> = () => {
       />
     </div>
   )
-
 }
 
 export default HeatmapPage
