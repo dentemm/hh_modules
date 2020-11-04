@@ -21,7 +21,7 @@ const HeatmapPage: React.FC<Props> = () => {
       const id = parseUrl(match)  
       setCurrentId(id)
     }
-  }, [])
+  }, [match])
 
   const generateRandomData = () => {
     setHasData(!hasData)
@@ -41,7 +41,7 @@ const HeatmapPage: React.FC<Props> = () => {
     }
     fetch()
 
-  }, [])
+  }, [currentId])
 
   return (
     <div className="container">
